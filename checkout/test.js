@@ -31,15 +31,20 @@ var PATTERN = /this/,
   filtered = myArray.filter(function (str) { return PATTERN.test(str); });
 
 const mappedUsers = users.map((user, index) => {
-  return (`<div class="project-card" key=${index}>
+  return (`<section class="itemWrapper">
+  <div class="project-card" key=${index}>
                   <div class="details">
                    <p id="box${index + 1}">${user.name}</p>
                    <p>${user.home_address}</p>
                    <p>${user.office_address}</p>
                  </div>
-            </div>
-            <button class="delBtn" onclick="testDelete()">x</button>
-            <button class="addBtn" onclick="testAdd(${index})">+</button>`);
+                 </div>
+                 <div class="btnContainer">
+                 <button class="addBtn" onclick="testAdd(${index})">+</button>
+                 <button class="delBtn" onclick="testDelete(${index})">x</button>
+                 </div>
+  </section>`);
 });
-
+// usersResult = mappedUsers.replace(/[,]+/g, "");
+// console.log(usersResult);
 usersContainer.innerHTML = mappedUsers;

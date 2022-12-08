@@ -8,22 +8,22 @@
   <title>Document</title>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
   <section class="topBox">
     <div class="logo">Placeholder for Logo</div>
     <section class="navContainer">
-      <a href="keyboards/keyboards.html" class="button">Keyboards</a>
-      <a href="mice/mice.html" class="button">Mice</a>
-      <a href="mousepads/mousepads.html" class="button">Mousepads</a>
       <a href="checkout/checkout.html" class="button">Checkout</a>
     </section>
   </section>
   <section class="mainContent">
     <section class="searchContainer">
       <p class="miniHeader">What are you looking for?</p>
-      <input class="inputBox" type="text" placeholder="Search">
+      <input id="searchBox" class="inputBox" type="text" placeholder="Search">
+      <div id="list"></div>
+      <type="text"\n name="search" placeholder="What are you looking for?"></type>
     </section>
   </section>
 </body>

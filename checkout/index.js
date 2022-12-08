@@ -2,15 +2,20 @@ let container = document.getElementById("container2");
 let listArr = [];
 
 window.onload = function () {
-  axios.get('/api/checkout/recordItems')
+  axios.get('http://localhost:4000/api/checkout/recordItems')
     .then(res => {
+      console.log(res.data)
       listArr = res.data;
-      for (let i = 0; i <= listArr.length; i++) {
-        container.insertAdjacentHTML("afterend", `<p id="list-${listArr[i]}">${listArr[i]}</p>`)
+      if (listArr[0] === undefined) {
+        return
+      } else {
+        for (let i = 0; i <= listArr.length; i++) {
+          container.insertAdjacentHTML("afterend", `<p id="list-${listArr[i]}">${listArr[i]}</p>`)
+        }
       }
     })
     .catch(err => {
-      console.log(err)
+        console.log(err)
     })
 }
 
@@ -31,10 +36,14 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
 
 function testAdd(index) {
   let string = document.getElementById(`box${index + 1}`).innerText;
+  let obj = {
+    string: string
+  }
 
-  axios.post('/api/checkout/addItem', string)
+  axios.post('http://localhost:4000/api/checkout/addItem', obj)
     .then(res => {
       listArr = res.data;
+      console.log(res.data);
       container.insertAdjacentHTML("afterend", `<p id="list-${string}">${string}</p>`)
     })
     .catch(err => {
@@ -49,43 +58,18 @@ const mappedList = listArr.map((el, index) => {
   )
 })
 
-function testDelete() {
-  let stringDiv = document.getElementById(`box${index + 1}`).innerText;
+function testDelete(index) {
+  let string = document.getElementById(`box${index + 1}`).innerText;
+  let obj = {
+    string: string
+  }
 
-  axios.delete('/api/checkout/removeItem', stringDiv)
+  axios.delete('http://localhost:4000/api/checkout/removeItem', obj)
     .then(res => {
       listArr = res.data;
-      document.getElementById(`list-${stringDiv}`).remove();
+      document.getElementById(`list-${string}`).remove();
     })
     .catch(err => {
       console.log(err)
     })
 }
-
-// let testAdd = function (index) {
-// let stringDiv = document.getElementById(`box${index + 1}`).innerText;
-
-//   let duplicateCheck = true;
-//   for (let i = 0; i <= listArr.length; i++) {
-//     if (stringDiv === listArr[i]) {
-//       duplicateCheck = false;
-//     }
-//   }
-//   if (duplicateCheck === true) {
-//     listArr.push(stringDiv);
-// container.insertAdjacentHTML("afterend", `<p id="list-${stringDiv}">${stringDiv}</p>`)
-//   }
-//   duplicateCheck = true;
-// }
-
-// let testDelete = function (index) {
-  // let stringDiv = document.getElementById(`box${index + 1}`).innerText;
-
-//   for (let i = 0; i <= listArr.length; i++) {
-//     if (stringDiv === listArr[i]) {
-//       listArr.splice(i, 1);
-//       document.getElementById(`list-${stringDiv}`).remove();
-//       console.log(listArr);
-//     }
-//   }
-// }

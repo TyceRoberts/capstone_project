@@ -3,7 +3,9 @@ let listArr = [];
 module.exports = {
   add: async (req, res) => {
     console.log('made it')
+    console.log(req.body);
     const { string } = req.body;
+    // console.log(string);
     let duplicateCheck = true;
 
     for (let i = 0; i <= listArr.length; i++) {
@@ -15,10 +17,11 @@ module.exports = {
     if (duplicateCheck === true) {
       listArr.push(string);
       res.status(200).send(listArr)
+    } else {
+      res.status(300).send(listArr)
     }
 
     duplicateCheck = true;
-    res.status(300).send(listArr)
   },
 
   get: async (req, res) => {
@@ -28,11 +31,14 @@ module.exports = {
 
   remove: async (req, res) => {
     console.log('made it')
-    const { stringDiv } = req.body;
+    const { string } = req.body;
 
     for (let i = 0; i <= listArr.length; i++) {
-      if (stringDiv === listArr[i]) {
-        listArr.splice(i, 1);
+      console.log('made it here');
+      if (string === listArr[i]) {
+        console.log('now here');
+        listArr.splice((i - 1), 1);
+        console.log(listArr);
       }
     }
 

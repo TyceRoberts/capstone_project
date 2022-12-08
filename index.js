@@ -57,3 +57,53 @@ let testDelete = function (index) {
     }
   }
 }
+
+
+function loadSearchData() {
+  let products = [
+      'Keychron K8 Wireless Mechanical Keyboard',
+      'Redragon K552 Mechanical Gaming Keyboard RGB LED',
+      'Logitech G915 TKL Wireless Gaming Keyboard',
+      'Galdas Gaming Mouse Pad',
+      'RGB Gaming Mouse Pad, Gerlos Large',
+      'Razer Goliathus Extended Chroma Gaming Mousepad: Customizable Chroma RGB Lighting',
+      'Glorious Gaming Model O Wireless Gaming Mouse RGB with Lights',
+      'Razer Viper V2 Pro HyperSpeed Wireless Gaming Mouse: 59g, wireless, 80 hour battery life',
+      'Logitech G502 HERO High Performance Wired Gaming Mouse'
+  ]
+  
+  let link = 'https://www.google.com';
+  
+  // Get the HTML element of the list
+  let list = document.getElementById('list')
+  // Add each data item as an <a> tag
+  products.forEach((product)=> {
+      let a = document.createElement("a");
+     a.setAttribute('href', link);
+      a.innerText = product;
+      a.classList.add("listItem");
+      list.appendChild(a);
+  })
+  
+  }// End of function
+  
+  function search() {
+      //search functionality goes here
+      let input = document.getElementById('searchBox').value;
+      let listContainer = document.getElementById('list');
+      let listItems = document.getElementsByClassName('listItem');
+      input = input.toLowerCase();
+      let noResults = true
+      for (i = 0; i < listItems.length; i++) {
+          if (!listItems[i].innerHTML.toLowerCase().includes(input) || input === "") {
+              listItems[i].style.display="none";
+              continue;
+          }
+          else {
+              listItems[i].style.display="flex";
+              noResults = false;
+          }
+  
+      }
+      listContainer.style.display = noResults ? "none" : "block"
+  }  
